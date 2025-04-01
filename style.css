@@ -1,0 +1,77 @@
+/* Cuerpo de la página HTML */
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: beige;
+    padding: 10px;
+}
+
+/* Contenedor principal */
+.main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+/* Panel de juego con las cajas mostradas  */
+.panelSimon{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+/* Estilos generales de las cajas */
+#red, #blue, #yellow, #green{
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+/* Color de fondo de cada caja */
+#red{
+    background-color: rgb(255, 0, 0);
+}
+#blue{
+    background-color: rgb(0, 0, 255);
+}
+#yellow{
+    background-color: rgb(210, 210, 0);
+}
+#green{
+    background-color: rgb(0, 128, 0);
+}
+
+/* Cambio de opacidad al activar la caja */
+/* #red:active{
+    opacity: 0.5;
+}
+#blue:active{
+    opacity: 0.5;
+}
+#yellow:active{
+    opacity: 0.5;
+}
+#green:active{
+    opacity: 0.5;
+} */
+
+.light{
+    opacity: 0.5;
+}
+
+/* Botón para empezar el juego */
+#start-button{
+    background-color: lightblue;
+    font-weight: bold;
+    padding: 5px;
+}
+
+/* Botón para volver a jugar */
+#reset-button{
+    background-color: lightblue;
+    font-weight: bold;
+    padding: 5px;
+}
