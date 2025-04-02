@@ -67,3 +67,21 @@ body{
     font-weight: bold;
     padding: 5px;
 }
+
+@media (max-width: 600px){
+    .panelSimon{
+        width: 300px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    #red, #blue, #yellow, #green{
+        width: 90px;
+        height: 90px;
+        border: 2px solid black;
+        border-radius: 20px;
+    }
+}
