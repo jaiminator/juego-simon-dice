@@ -24,10 +24,12 @@ greenBox.addEventListener('click', handlePlayerClick);
 function startGame() {
     numLevel = 0;
     gameSequence = [];
-    message.textContent = '';
+    message.textContent = 'EMPEZAMOS...';
     btnStart.disabled = 'true';
     btnReset.disabled = 'true';
-    nextLevel();
+    setTimeout(() => {
+        nextLevel();
+    }, 2000);
 }
 
 function nextLevel() {
@@ -41,7 +43,7 @@ function nextLevel() {
     
     const colourPosition = Math.floor(Math.random() * colours.length);
     gameSequence.push(colours[colourPosition]);
-    console.log(gameSequence);
+    /* console.log(gameSequence); */
     
     playSequence()
 }
@@ -55,7 +57,7 @@ async function wait(ms) {
 /* Función para mostrar la secuencia completa de colores */
 async function playSequence() {
 
-    console.log('MOSTRANDO SECUENCIA:');
+    /* console.log('MOSTRANDO SECUENCIA:'); */
 
     const lightDuration = 1000;
     const pauseDuration = 200;
@@ -63,7 +65,7 @@ async function playSequence() {
     for (const color of gameSequence) {
         const colorBox = document.getElementById(color);
         if (colorBox) {
-            console.log(color);
+            /* console.log(color); */
             colorBox.classList.add('light');
             await wait(lightDuration);
             colorBox.classList.remove('light');
@@ -71,7 +73,7 @@ async function playSequence() {
         }
     }
     canPlayerClick = true;
-    console.log('SECUENCIA TERMINADA');
+    /* console.log('SECUENCIA TERMINADA'); */
     message.textContent = 'TU TURNO!'
 }
 
@@ -80,7 +82,7 @@ async function lightButton(colorId) {
     const colorBox = document.getElementById(colorId);
     colorBox.classList.add('light');
 
-    const pauseDuration = 300;
+    const pauseDuration = 200;
     await wait(pauseDuration);
     colorBox.classList.remove('light');
 }
