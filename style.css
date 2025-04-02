@@ -45,24 +45,16 @@ body{
 }
 
 /* Cambio de opacidad al activar la caja */
-/* #red:active{
-    opacity: 0.5;
-}
-#blue:active{
-    opacity: 0.5;
-}
-#yellow:active{
-    opacity: 0.5;
-}
-#green:active{
-    opacity: 0.5;
-} */
-
 .light{
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 /* Botón para empezar el juego */
+#level-info, #start-button, #reset-button{
+    font-size: 1.5em;
+}
+
+/* Botón para jugar */
 #start-button{
     background-color: lightblue;
     font-weight: bold;

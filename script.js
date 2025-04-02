@@ -2,7 +2,7 @@ const colours = ['red', 'blue', 'yellow', 'green']; //Array con los colores disp
 let gameSequence = [];  //Secuencia generada por el juego
 let playerSequence = [];   //Secuencia introducida por el jugador
 let numLevel = 0; // Nivel actual
-let canPlayerClick = true; //Permite al jugador clickar
+let canPlayerClick = false; //No permite al jugador clickar
 
 //Lista de elementos del DOM
 const level = document.getElementById('level');
@@ -11,25 +11,38 @@ const btnStart  = document.getElementById('start-button');
 const btnReset  = document.getElementById('reset-button');
 btnReset.style.display = 'none';
 
+const redBox = document.getElementById('red');
+const blueBox = document.getElementById('blue');
+const yellowBox = document.getElementById('yellow');
+const greenBox = document.getElementById('green');
+
+redBox.addEventListener('click', handlePlayerClick);
+blueBox.addEventListener('click', handlePlayerClick);
+yellowBox.addEventListener('click', handlePlayerClick);
+greenBox.addEventListener('click', handlePlayerClick);
+
 function startGame() {
-    numLevel = 3;
+    numLevel = 0;
     gameSequence = [];
+    message.textContent = '';
     btnStart.disabled = 'true';
+    btnReset.disabled = 'true';
     nextLevel();
 }
 
 function nextLevel() {
     numLevel++; //incremento del nivel del juego
     level.textContent = numLevel;   //actualización por pantalla del nº del nivel
-    playerSequence = [];    //reseteo de la secuencia del jugador
+    playerSequence = []; //reseteo de la secuencia del jugador
+    message.textContent = '';   //mensaje vacío
     canPlayerClick = false; //no permite al jugador clickar
 
     // mete la combinación de colores aleatorio al array
-    for (let i = 1; i <= numLevel; i++) {
-        const colourPosition = Math.floor(Math.random() * colours.length);
-        gameSequence.push(colours[colourPosition]);
-    }
+    
+    const colourPosition = Math.floor(Math.random() * colours.length);
+    gameSequence.push(colours[colourPosition]);
     console.log(gameSequence);
+    
     playSequence()
 }
 
@@ -73,16 +86,39 @@ async function lightButton(colorId) {
 }
 
 /* Manejo de eventos para el jugador */
-function handlePlayerClick() {
-    const redBox  = document.getElementById('red');
-    const blueBox  = document.getElementById('blue');
-    const yellowBox  = document.getElementById('yellow');
-    const greenBox  = document.getElementById('green');
+function handlePlayerClick(event) {
 
-    redBox.addEventListener('click', lightButton());
-    blueBox.addEventListener('click', lightButton());
-    yellowBox.addEventListener('click', lightButton());
-    greenBox.addEventListener('click', lightButton());
+    if (canPlayerClick == true) {
+        const clickBox = event.target.id;   //obtener el id del botón pulsado
+        /* console.log(clickBox); */
+        lightButton(clickBox);
+        playerSequence.push(clickBox);
+        /* console.log(playerSequence); */
+        checkAnswer(playerSequence.length - 1);
+    }
+}
+
+async function checkAnswer(currentIndex) {
+    
+    if (playerSequence[currentIndex] !== gameSequence[currentIndex]) {
+        gameOver();
+    } else if (playerSequence[currentIndex] == gameSequence[currentIndex]){
+        if (playerSequence.length === gameSequence.length) {
+            canPlayerClick = false;
+            message.innerHTML = '<b>NIVEL COMPLETADO!!</b>';
+            setTimeout(() => {
+                nextLevel();
+            }, 2000);
+        }
+    }
+}
+
+function gameOver() {
+    canPlayerClick = false;
+    message.textContent = `JUEGO TERMINADO. PERDISTE! NIVEL ALCANZADO: ${numLevel}`;
+    btnStart.style.display = 'none';
+    btnReset.removeAttribute('disabled');
+    btnReset.style.display = 'inline-block';
 }
 
 /* Eventos iniciales de los botones para jugar o volver a jugar */
